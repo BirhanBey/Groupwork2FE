@@ -17,7 +17,8 @@ const ListGenerator = () => {
       <ul style={{listStyle: 'none'}}>
         {todos.map((todoList) => (
           <TodoList
-            key={todoList.id}            
+            key={todoList.id}   
+            title={todoList.title}         
           />
         ))}
       </ul>
