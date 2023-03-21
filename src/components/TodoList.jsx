@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import AddTodo from './AddTodo';
-import TodoItem from './TodoItem';
+import React, { useState } from "react";
+import AddTodo from "./AddTodo";
+import TodoItem from "./TodoItem";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
+  const [isVisible, setIsVisible] = useState(true);
 
   const handleAddTodo = (title) => {
     const newTodo = { id: Date.now(), title, completed: false };
@@ -35,11 +36,20 @@ const TodoList = () => {
     setTodos(updatedTodos);
   };
 
+  const handleDeleteAll = () => {
+    setIsVisible(false);
+  };
+
+  if (!isVisible) {
+    return null; // Return null to remove the component from the DOM
+  }
+
   return (
     <div>
       <h1>Todo List</h1>
+      <button onClick={handleDeleteAll}>Delete List</button>
       <AddTodo onAddTodo={handleAddTodo} />
-      <ul style={{listStyle: 'none'}}>
+      <ul style={{ listStyle: "none" }}>
         {todos.map((todo) => (
           <TodoItem
             key={todo.id}
