@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import AddTodo from './AddTodo'
+import AddTodoList from './AddTodoList'
 import TodoList from './TodoList'
 
 const ListGenerator = () => {
@@ -13,7 +13,7 @@ const ListGenerator = () => {
   return (
     <div>
         
-      <AddTodo onAddTodo={handleAddTodo} />
+      <AddTodoList onAddTodo={handleAddTodo} />
       <ul style={{listStyle: 'none'}}>
         {todos.map((todoList) => (
           <TodoList
