@@ -24,7 +24,7 @@ const ListGenerator = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [allTodos]);
     
   return (
     <div>

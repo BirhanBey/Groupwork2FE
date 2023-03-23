@@ -6,15 +6,10 @@ const TodoItem = ({
   onToggleTodo,
   onEditTodo,
   description,
-  todos,
 }) => {
   const [editing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(description || todo.title);
 
-  // const [eachDescription, setEachDescription] = useState()
-  // console.log(description);
-
-  // console.log(todo.title);
 
   const handleEdit = () => {
     setEditing(true);
@@ -70,10 +65,7 @@ const TodoItem = ({
       ) : (
         <>
           <span
-            style={{ textDecoration: todo.completed ? "line-through" : "none" }}
-          >
-            {newTitle}
-          </span>{" "}
+            style={{ textDecoration: todo.completed ? "line-through" : "none" }}>{newTitle}</span>
           {/* Değişiklik burada yapıldı. */}
           <button onClick={handleEdit}>Edit</button>
           <button onClick={handleDelete} disabled={!todo.completed}>
