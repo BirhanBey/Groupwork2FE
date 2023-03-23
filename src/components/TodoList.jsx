@@ -49,6 +49,16 @@ const TodoList = ({ allTodoList, todos, todoListId }) => {
       .catch((error) => console.error(error));
     setIsVisible(false);
   };
+  const deleteTodoById = async (id) => {
+    try {
+      await fetch(`https://s10.syntradeveloper.be/api/Todo&id=${id}`, {
+        method: "DELETE",
+      });
+      setEachTodos(eachTodos.filter((todo) => todo.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   if (!isVisible) {
     return null; // Return null to remove the component from the DOM
@@ -66,7 +76,7 @@ const TodoList = ({ allTodoList, todos, todoListId }) => {
           <TodoItem
             key={todo.id}
             todo={todo}
-            onDeleteTodo={handleDeleteTodo}
+            onDeleteTodo={(id) => deleteTodoById(id)}
             onToggleTodo={handleToggleTodo}
             onEditTodo={handleEditTodo}
             description={todo.description}
