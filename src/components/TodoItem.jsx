@@ -1,8 +1,16 @@
-import React, { useState} from 'react';
+import React, { useState } from "react";
 
-const TodoItem = ({ todo, onDeleteTodo, onToggleTodo, onEditTodo, description }) => {
+const TodoItem = ({
+  todo,
+  onDeleteTodo,
+  onToggleTodo,
+  onEditTodo,
+  description,
+  todos,
+}) => {
   const [editing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(description || todo.title);
+
   // const [eachDescription, setEachDescription] = useState()
   // console.log(description);
 
@@ -27,7 +35,23 @@ const TodoItem = ({ todo, onDeleteTodo, onToggleTodo, onEditTodo, description })
   };
 
   const handleToggle = () => {
-    onToggleTodo && onToggleTodo(todo.id);
+    fetch(`http://s10.syntradeveloper.be/api/Todo&id=${todo.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...todo,
+        isCompleted: true,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        onToggleTodo && onToggleTodo(todo.id);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -35,13 +59,22 @@ const TodoItem = ({ todo, onDeleteTodo, onToggleTodo, onEditTodo, description })
       <input type="checkbox" checked={todo.completed} onChange={handleToggle} />
       {editing ? (
         <>
-          <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
           <button onClick={handleSave}>Save</button>
           <button onClick={handleCancel}>Cancel</button>
         </>
       ) : (
         <>
-          <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{newTitle}</span> {/* Değişiklik burada yapıldı. */}
+          <span
+            style={{ textDecoration: todo.completed ? "line-through" : "none" }}
+          >
+            {newTitle}
+          </span>{" "}
+          {/* Değişiklik burada yapıldı. */}
           <button onClick={handleEdit}>Edit</button>
           <button onClick={handleDelete} disabled={!todo.completed}>
             Delete
@@ -50,7 +83,6 @@ const TodoItem = ({ todo, onDeleteTodo, onToggleTodo, onEditTodo, description })
       )}
     </li>
   );
-
 };
 
 export default TodoItem;

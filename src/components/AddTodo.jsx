@@ -1,26 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import axios from "axios";
+import todoListid from "./ListGenerator";
 
-const AddTodo = ({ onAddTodo }) => {
-  const [title, setTitle] = useState('');
+const AddTodo = ({ onAddTodo, todoListId }) => {
+  const [description, setDescription] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddTodo && onAddTodo(title.trim());
-    setTitle('');
+
+    try {
+      const response = await axios.post(
+        "http://s10.syntradeveloper.be/api/Todo",
+        {
+          description,
+          TodoList_id: todoListId,
+        }
+      );
+
+      onAddTodo && onAddTodo(response.data);
+      setDescription("");
+    } catch (error) {
+      console.error(error);
+      console.log(todoListid);
+    }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Add a new todo..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <button type="submit">Add</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+
+      <button type="submit">Add</button>
+    </form>
   );
 };
 
