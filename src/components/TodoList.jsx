@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import AddTodo from "./AddTodo";
 import TodoItem from "./TodoItem";
 
-
 const TodoList = ({allTodoList, todos, todoListId}) => {
   const [eachTodos, setEachTodos] = useState(todos || []);
-
   const [isVisible, setIsVisible] = useState(true);
-  const [title, setTitle] = useState(props.title);
 
   const handleAddTodo = (title) => {
     const newTodo = { id: Date.now(), title, completed: false };
@@ -49,12 +46,11 @@ const TodoList = ({allTodoList, todos, todoListId}) => {
 
   return (
     <div>
-
       <div  >
       <h3>{allTodoList}</h3>
       <button onClick={handleDeleteAll} >Delete List</button>
       </div>
-      <AddTodo onAddTodo={handleAddTodo} todoListId={todoListId}/>
+      <AddTodo onAddTodo={handleAddTodo} todoListId={todoListId} />
       <ul style={{ listStyle: "none" }}>
         {eachTodos.map((todo) => (
           <TodoItem
