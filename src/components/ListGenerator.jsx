@@ -33,10 +33,12 @@ const ListGenerator = () => {
       <ul style={{listStyle: 'none', display: 'flex'}}>
         {allTodos.map((allTodoList) => (
           <TodoList
+
             todoListId={allTodoList.id}
             key={allTodoList.id} 
             allTodoList={allTodoList.title}
             todos={allTodoList.todos}          
+
           />
         ))}
       </ul>
