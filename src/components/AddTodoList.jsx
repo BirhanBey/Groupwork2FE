@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+const AddTodoList = ({ onAddTodoList }) => {
+  const [name, setName] = useState("");
 
-const AddTodoList = ({ onAddTodo }) => {
-  const [title, setTitle] = useState();
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddTodo && onAddTodo(title.trim());
-    setTitle('');
+    if (name) {
+      const response = await fetch(
+        "https://s10.syntradeveloper.be/api/TodoList",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name.trim(),
+          }),
+        }
+      );
+      const data = await response.json();
+      onAddTodoList && onAddTodoList(data);
+      setName("");
+    }
   };
 
   return (
@@ -15,8 +29,8 @@ const AddTodoList = ({ onAddTodo }) => {
         <input
           type="text"
           placeholder="Add a new todo list..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <button type="submit">Add</button>
       </form>
