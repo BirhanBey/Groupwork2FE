@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import todoListid from "./ListGenerator";
 
 const AddTodo = ({ onAddTodo, todoListId }) => {
   const [description, setDescription] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
 
     try {
       const response = await axios.post(
@@ -21,7 +19,7 @@ const AddTodo = ({ onAddTodo, todoListId }) => {
       setDescription("");
     } catch (error) {
       console.error(error);
-      console.log(todoListid);
+      onAddTodo && onAddTodo({ error });
     }
   };
 
