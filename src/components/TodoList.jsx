@@ -70,6 +70,7 @@ const TodoList = ({ allTodoList, todos, todoListId }) => {
             onToggleTodo={handleToggleTodo}
             onEditTodo={handleEditTodo}
             description={todo.description}
+            todos={todo.id}
           />
         ))}
       </ul>
