@@ -24,24 +24,24 @@ const ListGenerator = () => {
           }
         };
         fetchData();
-      }, []);
+      }, [allTodos]);
     
   return (
-    <div>
-        
+    <div className=''>        
       <AddTodoList onAddTodo={handleAddTodo} />
-      <ul style={{listStyle: 'none', display: 'flex'}}>
-        {allTodos.map((allTodoList) => (
-          <TodoList
-            todoListId={allTodoList.id}
-            key={allTodoList.id} 
-            allTodoList={allTodoList.title}
-            todos={allTodoList.todos}          
-          />
-        ))}
-      </ul>
-
-    </div>
+        <div className='columns '>
+          <ul className='column is-flex-wrap-wrap' style={{listStyle: 'none', display: 'flex'}}>
+            {allTodos.map((allTodoList) => (
+              <TodoList
+                todoListId={allTodoList.id}
+                key={allTodoList.id} 
+                allTodoList={allTodoList.title}
+                todos={allTodoList.todos}          
+              />
+            ))}
+          </ul>
+        </div>
+      </div>
   )
 }
 
