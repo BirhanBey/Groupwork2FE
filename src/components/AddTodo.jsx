@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import todoListid from "./ListGenerator";
 
 const AddTodo = ({ onAddTodo, todoListId }) => {
   const [description, setDescription] = useState("");
 
   const handleSubmit = async () => {
-    
-
     try {
       const response = await axios.post(
         "http://s10.syntradeveloper.be/api/Todo",
@@ -20,7 +17,7 @@ const AddTodo = ({ onAddTodo, todoListId }) => {
       setDescription("");
     } catch (error) {
       console.error(error);
-      console.log(todoListid);
+      onAddTodo && onAddTodo({ error });
     }
   };
 
