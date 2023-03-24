@@ -77,7 +77,7 @@ const TodoItem = ({
               <input className=" mr-5" type="checkbox" checked={todo.completed} onChange={handleToggle} />
               <h2 className="mr-auto is-align-self-center has-text-grey"
                 style={{ textDecoration: todo.completed ? "line-through" : "none" }}>{newTitle}</h2>
-              {/* Değişiklik burada yapıldı. */}
+              
               <div className="is-flex is-justify-content-flex-end">
                 <button className="button is-info is-light mr-2" onClick={handleEdit}>Edit</button>
                 <button className="button is-danger is-ligh is-outlined" title="Disabled button" onClick={handleDelete} disabled={!todo.completed}>
