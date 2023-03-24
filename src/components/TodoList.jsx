@@ -65,25 +65,27 @@ const TodoList = ({ allTodoList, todos, todoListId }) => {
   }
 
   return (
-    <div>
-      <div>
-        <h3>{allTodoList}</h3>
-        <button onClick={handleDeleteTodoList}>Delete List</button>
+    <div className="container">
+      <div className="is-flex is-justify-content-space-between ">
+        <h3 className="title ml-5 has-text-grey">{allTodoList}</h3>
+        <button className="button is-outlined is-danger is-light mr-6" onClick={handleDeleteTodoList}>Delete List</button>
       </div>
-      <AddTodo onAddTodo={handleAddTodo} todoListId={todoListId} />
-      <ul style={{ listStyle: "none" }}>
-        {eachTodos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onDeleteTodo={(id) => deleteTodoById(id)}
-            onToggleTodo={handleToggleTodo}
-            onEditTodo={handleEditTodo}
-            description={todo.description}
-            todos={todo.id}
-          />
-        ))}
-      </ul>
+      <div className="box mr-5 mb-6 has-background-info-light">
+        <AddTodo onAddTodo={handleAddTodo} todoListId={todoListId} />
+        <ul style={{ listStyle: "none" }}>
+          {eachTodos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onDeleteTodo={(id) => deleteTodoById(id)}
+              onToggleTodo={handleToggleTodo}
+              onEditTodo={handleEditTodo}
+              description={todo.description}
+              todos={todo.id}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
